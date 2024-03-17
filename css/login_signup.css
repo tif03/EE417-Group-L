@@ -101,4 +101,13 @@
 
 #register {
     left: 450px;
+    top: 100px;
+}
+
+a{
+    color: #000 ;
+}
+
+a:hover{
+    color: #ff105f;
 }
