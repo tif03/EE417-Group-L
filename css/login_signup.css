@@ -106,8 +106,21 @@
 
 a{
     color: #000 ;
+    cursor: pointer;
 }
 
 a:hover{
     color: #ff105f;
+}
+
+#TnC{
+    background-color: #f1f1f1;
+    display: none;
+    position: fixed;
+    top: 20%;
+    bottom: 20%;
+    right: 30%;
+    left: 30%;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
 }

@@ -28,10 +28,13 @@
                 <input type="email" class="input-field" placeholder="E-mail" required>
                 <input type="password" class="input-field" placeholder="Enter Password" required>
                 <input type="password" class="input-field" placeholder="Confirm Password" required>
-                <input type="checkbox" class="check-box" required><span>I agree to the <a href="#">terms & conditions</a></span>
+                <input type="checkbox" class="check-box" required><span>I agree to the <a onclick="openTnC()">terms & conditions</a></span>
                 <button type="submit" class="submit_btn">Register</button>
             </form>
 
+            <div id="TnC">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, quisquam odio. Corrupti voluptate debitis error, soluta dolor ratione eos, ab nulla, voluptatum cumque adipisci illum odit labore ea nam eligendi.</p>
+            </div>
         </div>
     </div>
 
@@ -51,6 +54,18 @@
             y.style.left = "450px";
             z.style.left = "0";
         }
+
+        function openTnC(){
+            document.getElementById("TnC").style.display = "block";
+        }
+
+
+        window.addEventListener('mouseup',function(event){
+        var TnC = document.getElementById('TnC');
+        if(event.target != TnC && event.target.parentNode != TnC){
+            TnC.style.display = 'none';
+            }  
+        });  
     </script>
 
 </body>
