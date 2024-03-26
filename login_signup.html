@@ -16,14 +16,14 @@
                 <button type="button" class="toggle-btn" onclick="register()">Register</button>
             </div>
 
-            <form id="login" class="input-group">
+            <form id="login" class="input-group" onsubmit="transitionToPage(event)">
                 <input type="text" class="input-field" placeholder="Enrollment Number" required>
                 <input type="password" class="input-field" placeholder="Enter Password" required>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit_btn">Log In</button>
             </form>
 
-            <form id="register" class="input-group">
+            <form id="register" class="input-group" onsubmit="transitionToPage(event)">
                 <input type="text" class="input-field" placeholder="Enrollment Number" required>
                 <input type="email" class="input-field" placeholder="E-mail" required>
                 <input type="password" class="input-field" placeholder="Enter Password" required>
@@ -66,6 +66,19 @@
             TnC.style.display = 'none';
             }  
         });  
+
+        window.transitionToPage = function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+            document.querySelector('body').style.opacity = 0
+            setTimeout(function() { 
+                window.location.href = "dashboard.html"
+            }, 500)
+        }
+
+        document.addEventListener('DOMContentLoaded', function(event) {
+            document.querySelector('body').style.opacity = 1
+        })
+
     </script>
 
 </body>
