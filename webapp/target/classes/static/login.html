@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Dashboard</title>
+    <link rel="stylesheet" href="./css/login_signup.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="form-box">
+            <div class="button-box">
+                <button type="button" class="toggle-btn" id="loginBtn">Log In</button>
+                <button type="button" class="toggle-btn" id="registerBtn">Register</button>
+            </div>
+
+            <form id="login" class="input-group">
+    <input type="text" name="email" class="input-field" placeholder="Email" required>
+    <input type="password" name="password" class="input-field" placeholder="Enter Password" required>
+    <input type="checkbox" class="check-box"><span>Remember Password</span>
+    <button type="submit" class="submit_btn">Log In</button>
+</form>
+
+            <form id="register" class="input-group" action="/api/users/register" method="post">
+    <input type="text" name="enrollmentNumber" class="input-field" placeholder="Enrollment Number" required>
+    <input type="email" name="email" class="input-field" placeholder="E-mail" required>
+    <input type="password" name="password" class="input-field" placeholder="Enter Password" required>
+    <input type="password" name="confirmPassword" class="input-field" placeholder="Confirm Password" required>
+    <input type="checkbox" class="check-box" required><span>I agree to the <a href="#" id="openTnC">terms & conditions</a></span>
+    <button type="submit" class="submit_btn">Register</button>
+</form>
+
+            <div id="TnC" style="display:none;">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, quisquam odio. Corrupti voluptate debitis error, soluta dolor ratione eos, ab nulla, voluptatum cumque adipisci illum odit labore ea nam eligendi.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/login_signup.js"></script>
+</body>
+</html>
