@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Dash Board</title>
-    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/room.css">
     <link href="./img/fontawesome/css/fontawesome.css" rel="stylesheet" />
     <link href="./img/fontawesome/css/brands.css" rel="stylesheet" />
     <link href="./img/fontawesome/css/solid.css" rel="stylesheet" />
@@ -61,82 +61,39 @@
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
-                <h2>Welcome</h2>
-                <span>User</span>
-            </div>
-            <div class="user--info">
-                <div class="search--box">
-                    <i class="fas fa-search"></i>
-                    <input type="text"
-                    placeholder="Search"/>
-                </div>
-            
-            </div>
-            <div class="profile-pic">
-                <i class="fas fa-user"></i>
+                <h2>Room Availability</h2>
+                <span>Check available rooms and spaces</span>
             </div>
         </div>
-
-        <div class="card--containter">
-            <h3 class="main--title">Home Page</h3>
-            <div class="card--wrapper">
-                <div class="weather--card
-                light-blue">
-                    <span class="title">
-                        Today's Weather
-                    </span>
-                    <div class="card--header">
-                        <div class="weather">
-                            <br>
-                            <i class="fas fa-sun icon"></i>
-                            <br>
-                            <span class="weather-value">Sunny</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="events--card
-                light-purple">
-                    <span class="title">
-                        Campus Events & Updates
-                    </span>
-
-                    <ul class="events--list">
-                        <li class="event">Computer Science Job Fair - 4/11</li>
-                        <li class="event">Free Breakfast</li>
-                        <li class="event">Show at The Helix - 5/2</li>
-                    </ul>
-                </div>
-
-                <div class="parking--card
-                light-red">
-                    <span class="title">
-                        University Map & Parking
-                    </span>
-                    <img src="img/dcu_campusmap_carparks.jpg" alt="DCU Campus Map and Parking">
-                </div>
-
-                <div class="room--card
-                light-green">
-                <span class="title">
-                    Room & Study Space Avaliability
-                </span>
-
+    
+        <div class="card--container">
+            <!-- Room 102 Card -->
+            <div class="room--card light-green available-room">
                 <div class="room-header">
-                    <h2 class="room-title">Room 101</h2>
+                    <h2 class="room-title">Room 102</h2>
                     <span class="availability available">Available</span>
                 </div>
                 <div class="room-details">
-                    <p>Location: Main Building, 1st Floor</p>
-                    <p>Capacity: 10</p>
+                    <p>Location: Library Building, 2nd Floor</p>
+                    <p>Capacity: 20</p>
                     <p>Occupied Seats: 5</p>
                 </div>
-
-                </div>
-
             </div>
-
+    
+            <!-- Room 103 Card -->
+            <div class="room--card light-green unavailable-room">
+                <div class="room-header">
+                    <h2 class="room-title">Room 103</h2>
+                    <span class="availability unavailable">Occupied</span>
+                </div>
+                <div class="room-details">
+                    <p>Location: Main Building, 3rd Floor</p>
+                    <p>Capacity: 15</p>
+                    <p>Occupied Seats: 15</p>
+                </div>
+            </div>
             
+            <!-- Add more rooms as needed -->
         </div>
 
         <br>
@@ -157,8 +114,7 @@
                 </a>
             </div>
         </div>
-        
-        
 
     </div>
+
 </body>
