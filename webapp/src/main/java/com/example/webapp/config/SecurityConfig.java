@@ -28,17 +28,17 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
 //                .cors(Customizer.withDefaults())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 使用自定义CORS配置
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/api/users/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults()); // 使用推荐方式启用HTTP基础认证
+                .httpBasic(Customizer.withDefaults());
 
         AuthenticationManagerBuilder auth = http.getSharedObject(AuthenticationManagerBuilder.class);
         auth.inMemoryAuthentication()
-                .withUser("XXXXXXXX")
-                .password(passwordEncoder().encode("XXXXXXXX")) // 这里的密码需要是编码后的
+                .withUser("GroupL")
+                .password(passwordEncoder().encode("GroupL"))
                 .roles("USER");
         return http.build();
     }
