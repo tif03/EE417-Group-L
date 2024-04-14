@@ -16,21 +16,22 @@
                 <button type="button" class="toggle-btn" onclick="register()">Register</button>
             </div>
 
-            <form id="login" class="input-group" onsubmit="transitionToPage(event)">
-                <input type="text" class="input-field" placeholder="Enrollment Number" required>
-                <input type="password" class="input-field" placeholder="Enter Password" required>
+            <form id="login" class="input-group" onsubmit="loginUser(event)">
+                <input type="text" name="enrollmentNumber" class="input-field" placeholder="Enrollment Number" required>
+                <input type="password" name="password" class="input-field" placeholder="Enter Password" required>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit_btn">Log In</button>
             </form>
+            
 
-            <form id="register" class="input-group" onsubmit="transitionToPage(event)">
-                <input type="text" class="input-field" placeholder="Enrollment Number" required>
-                <input type="email" class="input-field" placeholder="E-mail" required>
-                <input type="password" class="input-field" placeholder="Enter Password" required>
-                <input type="password" class="input-field" placeholder="Confirm Password" required>
+            <form id="register" class="input-group" onsubmit="handleRegister(event)">
+                <input type="text" class="input-field" placeholder="Enrollment Number" name="enrollmentNumber" required>
+                <input type="email" class="input-field" placeholder="E-mail" name="email" required>
+                <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
+                <input type="password" class="input-field" placeholder="Confirm Password" name="confirmPassword" required>
                 <input type="checkbox" class="check-box" required><span>I agree to the <a onclick="openTnC()">terms & conditions</a></span>
                 <button type="submit" class="submit_btn">Register</button>
-            </form>
+            </form>            
 
             <div id="TnC">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, quisquam odio. Corrupti voluptate debitis error, soluta dolor ratione eos, ab nulla, voluptatum cumque adipisci illum odit labore ea nam eligendi.</p>
@@ -59,6 +60,78 @@
             document.getElementById("TnC").style.display = "block";
         }
 
+        function handleRegister(event) {
+            event.preventDefault(); 
+        
+            const form = document.getElementById('register');
+            const formData = new FormData(form);
+            
+            // validate password
+            if (formData.get('password') !== formData.get('confirmPassword')) {
+                alert('Passwords do not match');
+                return;
+            }
+        
+            const user = {
+                enrollmentNumber: formData.get('enrollmentNumber'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+            };
+        
+            fetch('http://localhost:8080/api/users/register',{
+                method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('GroupL:GroupL') 
+                    },
+                body: JSON.stringify(user)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); 
+                alert("Registration Successful!");
+                window.location.href = "login.html";  
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Error registering user.");
+            });
+        }
+        
+
+        function loginUser(event) {
+            event.preventDefault(); 
+        
+            var form = document.getElementById('login');
+            var formData = new FormData(form);
+            var jsonData = {
+                enrollmentNumber: formData.get('enrollmentNumber'),
+                password: formData.get('password')
+            };
+
+            fetch('http://localhost:8080/api/users/login',{
+                method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('GroupL:GroupL') 
+                    },
+                    body: JSON.stringify(jsonData) 
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text(); 
+                    } else {
+                        throw new Error('Invalid username or password');
+                    }
+                })
+                .then(data => {
+                    alert("Login successful: " + data);
+                    window.location.href = "dashboard.html"; 
+                })
+                .catch(error => {
+                    alert(error.message); 
+                });
+            }
 
         window.addEventListener('mouseup',function(event){
         var TnC = document.getElementById('TnC');
