@@ -34,6 +34,12 @@ app.get('/weather', (req, res) => {
     res.sendFile(__dirname + '/weather.html');
 });
 
+// Route for weather.html
+app.get('/profile', (req, res) => {
+    res.sendFile(__dirname + '/profile.html');
+});
+
+
 // Listen to the specified port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
