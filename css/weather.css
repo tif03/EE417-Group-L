@@ -174,9 +174,7 @@ body {
 
 /* weather card */
 .weather--card {
-    background: #ccc;
     border-radius: 10px;
-    padding: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -308,6 +306,7 @@ body {
     justify-content: space-around; /* Distribute space around the content */
     padding: 15px; /* Add some padding inside the weather cards */
     text-align: center; /* Center the text */
+    height: 200px;
 }
 
 .weather i {
