@@ -87,6 +87,7 @@ body {
     width: 100%;
     padding: 1rem;
     margin-left: 110px;
+    height: max-content;
 }
 
 .profile-pic {
