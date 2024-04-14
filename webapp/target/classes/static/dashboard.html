@@ -1,0 +1,203 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Dash Board</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link href="./img/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="./img/fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="./img/fontawesome/css/solid.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo"></div>
+        <ul class="menu">
+            <li class="active">
+                <a href="#">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="weather.html">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Weather</span>
+                </a>
+            </li>
+            <li>
+                <a href="map.html">
+                    <i class="fas fa-map-marked"></i>
+                    <span>Map</span>
+                </a>
+            </li>
+            <li>
+                <a href="calendar.html">
+                    <i class="fas fa-calendar"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li>
+                <a href="room.html">
+                    <i class="fas fa-door-closed"></i>
+                    <span>Room Availibility</span>
+                </a>
+            </li>
+            <li>
+                <a href="profile.html">
+                    <i class="fas fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="logout">
+                <a href="login_signup.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <h2>Welcome</h2>
+                <span>User</span>
+            </div>
+            <div class="user--info">
+                <div class="search--box">
+                    <i class="fas fa-search"></i>
+                    <input type="text"
+                    placeholder="Search"/>
+                </div>
+            
+            </div>
+            <a href="profile.html">
+                <div class="profile-pic">
+                    <i class="fas fa-user"></i>
+                </div>
+            </a>
+        </div>
+
+        <div class="card--containter">
+            <h3 class="main--title">Home Page</h3>
+            <div class="card--wrapper">
+                <div class="weather--card
+                light-blue">
+                    <span class="title">
+                        Today's Weather
+                    </span>
+                    <div class="card--header">
+                        <div class="weather">
+                            <br>
+                            <i class="fas fa-sun icon"></i>
+                            <br>
+                            <span class="weather-value">Sunny</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="events--card
+                light-purple">
+                    <span class="title">
+                        Campus Events & Updates
+                    </span>
+
+                    <ul class="events--list">
+                        <li class="event">Computer Science Job Fair - 4/11</li>
+                        <li class="event">Free Breakfast</li>
+                        <li class="event">Show at The Helix - 5/2</li>
+                    </ul>
+                </div>
+
+                <div class="parking--card
+                light-red">
+                    <span class="title">
+                        University Map & Parking
+                    </span>
+                    <img src="img/dcu_campusmap_carparks.jpg" alt="DCU Campus Map and Parking">
+                </div>
+
+                <div class="room--card
+                light-green">
+                <span class="title">
+                    Room & Study Space Avaliability
+                </span>
+
+                <div class="room-header">
+                    <h2 class="room-title">Room 101</h2>
+                    <span class="availability available">Available</span>
+                </div>
+                <div class="room-details">
+                    <p>Location: Main Building, 1st Floor</p>
+                    <p>Capacity: 10</p>
+                    <p>Occupied Seats: 5</p>
+                </div>
+
+                </div>
+
+            </div>
+
+            
+        </div>
+
+        <br>
+
+        <div class="contact--container">
+            <div class="header--wrapper">
+                <h3 class="main--title">Contact Us</h3>
+            </div>
+        
+            <div class="contact--wrapper">
+                <a href="#" class="contact-icon" title="Email">
+                    <i class="fas fa-envelope"></i>
+                    <span class="contact-info">example@example.com</span>
+                </a>
+                <a href="#" class="contact-icon" title="Phone">
+                    <i class="fas fa-phone"></i>
+                    <span class="contact-info">123-456-7890</span>
+                </a>
+            </div>
+        </div>
+        
+        
+
+    </div>
+    
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch and display the weather data
+    fetch('/api/weather/today')
+    .then(response => response.json())
+    .then(data => {
+        const weatherContainer = document.querySelector('.weather');
+        weatherContainer.innerHTML = `
+            <br>
+            <i class="fas fa-${data.value.toLowerCase()} icon"></i>
+            <br>
+            <span class="weather-value">${data.value}</span>
+            <p>Temp: ${data.temp}°C</p>
+            <p>Wind Speed: ${data.windSpeed} km/h</p>
+            <p>Humidity: ${data.humidity}%</p>
+        `;
+    })
+    .catch(error => console.error('Error loading weather data:', error));
+
+    // Fetch and display room data
+    fetch('/api/rooms/all')
+    .then(response => response.json())
+    .then(data => {
+        const roomContainer = document.querySelector('.room-details');
+        const firstRoom = data[0]; // Assuming we want to display the first room for demo
+        roomContainer.innerHTML = `
+            <p>Location: ${firstRoom.location}</p>
+            <p>Capacity: ${firstRoom.capacity}</p>
+            <p>Occupied Seats: ${firstRoom.occupiedSeat}</p>
+            <span class="availability ${firstRoom.available ? 'available' : 'unavailable'}">${firstRoom.available ? 'Available' : 'Unavailable'}</span>
+        `;
+    })
+    .catch(error => console.error('Error loading room data:', error));
+});
+</script>
+    
+</body>
