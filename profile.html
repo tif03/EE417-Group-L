@@ -136,7 +136,7 @@
                                         </div>
                                     </div>
                                     <!-- Save changes button-->
-                                    <button class="btn btn-primary" type="button">Save changes</button>
+                                    <button class="btn btn-primary" type="submit">Save changes</button>
                                 </form>
                             </div>
                     </div>
@@ -156,26 +156,22 @@
                         <!-- Account details card-->
                             <h2>Change Password</h2>
                             <div class="card-body">
-                                <form>
-                                    <!-- Password Group (Current Password)-->
+                                <form id="changePasswordForm">
                                     <div class="mb-3">
-                                        <label class="small mb-1" for="inputUsername">Enter Your Current Password</label>
-                                        <input class="form-control" id="inputUsername" type="password" placeholder="Enter your current password" value="">
-                                     </div>
-
-                                     <div class="mb-3">
-                                        <label class="small mb-1" for="inputUsername">Enter Your New Password</label>
-                                        <input class="form-control" id="inputUsername" type="password" placeholder="Enter your new password" value="">
-                                     </div>
-
-                                     <div class="mb-3">
-                                        <label class="small mb-1" for="inputUsername">Confirm Your New Password</label>
-                                        <input class="form-control" id="inputUsername" type="password" placeholder="Confirm your new password" value="">
-                                     </div>
-                                  
-                                    <!-- Save changes button-->
-                                    <button class="btn btn-primary" type="button">Change Password</button>
+                                        <label class="small mb-1" for="currentPassword">Enter Your Current Password</label>
+                                        <input class="form-control" id="currentPassword" type="password" placeholder="Enter your current password">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="newPassword">Enter Your New Password</label>
+                                        <input class="form-control" id="newPassword" type="password" placeholder="Enter your new password">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="confirmPassword">Confirm Your New Password</label>
+                                        <input class="form-control" id="confirmPassword" type="password" placeholder="Confirm your new password">
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Change Password</button>
                                 </form>
+                                
                             </div>
                     </div>
                 </div>
@@ -209,23 +205,22 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const form = document.getElementById('userInfoForm');
-        
-            form.addEventListener('submit', function(event) {
+            const userInfoForm = document.getElementById('userInfoForm');
+            userInfoForm.addEventListener('submit', function(event) {
                 event.preventDefault();
         
-                const formData = new FormData(form);
+                const formData = new FormData(userInfoForm);
                 const jsonData = {};
                 formData.forEach((value, key) => {
                     jsonData[key] = value;
                 });
         
-                fetch('http://localhost:8080/api/users/submitUserInfo',{
+                fetch('http://localhost:8080/api/users/submitUserInfo', {
                     method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Basic ' + btoa('GroupL:GroupL') 
-                        },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('GroupL:GroupL') 
+                    },
                     body: JSON.stringify(jsonData)
                 })
                 .then(response => response.json())
@@ -238,8 +233,36 @@
                     alert('Error updating user info.');
                 });
             });
+        
+            const passwordForm = document.getElementById('changePasswordForm');
+            passwordForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+        
+                const formData = {
+                    currentPassword: document.getElementById('currentPassword').value,
+                    newPassword: document.getElementById('newPassword').value,
+                    confirmPassword: document.getElementById('confirmPassword').value
+                };
+        
+                fetch('http://localhost:8080/changePassword', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('GroupL:GroupL') 
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Password changed successfully!');
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('Error changing password.');
+                });
+            });
         });
         </script>
-        
 </body>
 </html>
