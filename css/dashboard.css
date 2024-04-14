@@ -57,7 +57,7 @@ body {
 }
 
 .menu a{
-    color: fff;
+    color: #fff;
     font-size: 14px;
     text-decoration: none;
     display: flex;
@@ -390,7 +390,9 @@ body {
     background: blue;
 }
 
-
+.class{
+    opacity: 0%;
+}
 
 
 
