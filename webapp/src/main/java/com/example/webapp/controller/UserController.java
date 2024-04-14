@@ -43,14 +43,14 @@ public class UserController {
                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Create a new user
-    
-//    @PostMapping("/register")
-//    public ResponseEntity<User> registerUser(@RequestBody User user) {
-//        User savedUser = userService.saveUser(user);
-//        return ResponseEntity.ok(savedUser);
-//    }
+    @PostMapping("/submitUserInfo")
+    public ResponseEntity<User> submitUserInfo(@RequestBody User user) {
+        System.out.println("Received file: " + user.getEnrollmentNumber() + user.getUserId());
+        User savedUser = userService.saveUser(user);
+        return ResponseEntity.ok(savedUser);
+    }
 
+    // Create a new user
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         logger.info("Creating a new user with username: {}", user.getEnrollmentNumber());

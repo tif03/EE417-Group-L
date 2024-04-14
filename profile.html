@@ -85,7 +85,7 @@
                         <!-- Account details card-->
                             <h2>Account Details</h2>
                             <div class="card-body">
-                                <form>
+                                <form id="userInfoForm">
                                     <!-- Form Group (username)-->
                                     <div class="mb-3">
                                         <label class="small mb-1" for="inputUsername">Username (how your name will appear on the site)</label>
@@ -206,5 +206,40 @@
         
 
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('userInfoForm');
+        
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+        
+                const formData = new FormData(form);
+                const jsonData = {};
+                formData.forEach((value, key) => {
+                    jsonData[key] = value;
+                });
+        
+                fetch('http://localhost:8080/api/users/submitUserInfo',{
+                    method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('GroupL:GroupL') 
+                        },
+                    body: JSON.stringify(jsonData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('User info updated successfully!');
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('Error updating user info.');
+                });
+            });
+        });
+        </script>
+        
 </body>
 </html>
