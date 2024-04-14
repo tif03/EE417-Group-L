@@ -12,17 +12,19 @@ body {
 }
 
 .sidebar {
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     left: 0;
     bottom: 0;
     width: 110px;
-    height: 100vh;
+    height: 100%;
     padding: 0 1.7rem;
     color: #fff;
     overflow: hidden;
     transition: all 0.5s linear;
     background: #ffad06;
+    position: fixed;
+    z-index: 1;
 }
 
 .sidebar:hover {
@@ -80,6 +82,7 @@ body {
 
 /* main body */
 .main--content {
+    margin-left: 110px;
     position: relative;
     background: #f3ebdb;
     width: 100%;
